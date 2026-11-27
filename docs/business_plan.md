@@ -245,7 +245,7 @@ None of these is a moat. The defensible parts would be customer relationships, o
 | **Costs Y2** | ₹9 lakh | ₹19 lakh | ₹30 lakh |
 | **Costs Y3** | ₹10 lakh | ₹40 lakh | ₹90 lakh |
 | Net Y3 | about +₹2.6 lakh (see note) | about +₹9.5 lakh | about +₹54 lakh |
-| Net over Y1-Y3 | about -₹7 lakh | about -₹5.6 lakh | about +₹14.8 lakh |
+| Net over Y1-Y3 | about -₹7 lakh | about +₹2.4 lakh | about +₹63 lakh |
 | What it means (OPINION) | A side project or a consulting line; not a venture business | A small, sustainable company; grant plus a small angel round is enough | Needs a second city and probably a hospital product; angel or seed round in Y2 |
 
 Note on Low: Y3 revenue (₹12.6 lakh) is about ₹2.6 lakh above Y3 costs (₹10 lakh), but only because the founder works alone at ₹50,000 a month. Over three years the Low case loses about ₹7 lakh, which must come from grants.
