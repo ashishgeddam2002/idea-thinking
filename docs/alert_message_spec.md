@@ -93,7 +93,7 @@ Voice rules: one sentence of at most 8 words when TTA is under 30 s; no jargon; 
 3. Rate limit: at most 3 alerts per driver per 10 minutes (**ESTIMATE**, tune in the pilot).
 4. Cancel: if the crew ends the run, or the ambulance leaves the corridor, send "cancel" and play nothing (or "passed" only if an alert was already spoken).
 5. Staleness: if the phone has not received a corridor update for 10 s, drop the alert silently.
-6. Never alert a rider for an ambulance that is behind the rider by TTA under 10 s only through a banner; keep voice only.
+6. Riders on two-wheelers get voice and vibration only, never a banner.
 7. User can mute for 1 hour. The app never ranks or scores the driver (see [privacy_design.md](privacy_design.md)).
 
 ## 7. Human-factors evidence
