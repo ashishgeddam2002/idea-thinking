@@ -73,10 +73,38 @@ Voice rules: one sentence of at most 8 words when TTA is under 30 s; no jargon; 
 | Channel | Spec | Why |
 |---|---|---|
 | Voice | First channel. Lower ("duck") other audio, including navigation, by 70% for the sentence, then restore. Audio focus: `AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK`. Prefer the call/navigation audio stream so it plays through Bluetooth helmets and earphones. | Eyes stay on the road. |
-| Banner | Full screen, shown over the lock screen if the OS allows. Black on bright yellow, or white on dark blue (both pass colour-blind checks below). Arrow at least 40% of screen height. Max 5 words. No buttons: nothing to tap. Auto-dismiss on "passed" or after 15 s. | Glance under 2 s. |
+| Banner | Cars only. Full screen, shown over the lock screen if the OS allows (see 4b for limits). Black on bright yellow, or white on dark blue (both pass colour-blind checks below). Arrow at least 40% of screen height. Max 5 words. No buttons: nothing to tap. Auto-dismiss on "passed" or after 15 s. | Glance under 2 s. |
 | Vibration | Pattern distinct from calls and messages: three short pulses then one long (100-100-100-100-100-100-500 ms), amplitude high. Different pattern for "passed" (one short). | Deaf or noisy-road drivers. |
 | Two-wheelers | Audio only, through earphones or a Bluetooth helmet. Screen stays off or dim. No banner needed. If no earphones are connected, do not use the loudspeaker as the only channel: **OPINION:** road noise makes it unreliable; use vibration (phone in pocket) as backup and record the case in the pilot. | The rider cannot read a screen. |
 | Car, hands-free | Voice plus banner on a dash-mounted phone. | Same reg. 37 caution. |
+
+### 4b. Map-style visual alert (added after founder feedback)
+
+Idea: on a dash-mounted phone or a car screen, show a map-like screen with the safe side marked, instead of text only. Auto-open it when an alert starts.
+
+| Part of the idea | Spec | Reason |
+|---|---|---|
+| Map view with the user's own road | Simple top-down road, the driver's car in the centre, the ambulance marked behind with its distance, the **left edge of the road shaded** as the "go here" side. Drawn by our own app from the local OSM tiles, not by opening Google Maps. | Google Maps has no public hook for an outside app to draw on it or take it over. Our own screen works the same on any map the driver uses. |
+| Side colouring | Case 3 (move left): left half of the screen and left road edge in a bright **blue** band with a big left arrow. Case 4 (stay put): whole screen **amber** with a stop icon. Case 5 (move left and stop): left blue band plus a stop icon. **Red is not used for the whole screen.** | **OPINION:** a fully red screen reads as "danger, brake hard" and can cause a panic stop or a swerve. About 1 in 12 men are red-green colour blind (common figure, not checked in this session), so side must be shown by position and an arrow, not by colour alone. |
+| "Stay on the right" | **Not offered.** If the driver is already in the leftmost lane, the screen says "stay put", not "stay right". | Reg. 27(5)(a) says left. The only exception found is a police officer's direction. If a police officer directs otherwise, the officer wins, and the app cannot know that. |
+| Auto-open on cars | If the phone is on a dash mount and the app has permission, show the alert as a full-screen overlay. On Android Auto or CarPlay, the alert would have to come from a navigation or similar approved app category. | See "Platform limits" below. |
+| Two-wheelers | **No map and no screen.** Voice and vibration only. | The rider cannot look at a screen. |
+
+Rules for the screen:
+1. At most 5 words, the arrow, and the distance. No buttons, no zoom, nothing to touch.
+2. A glance of about 2 s must be enough (see section 7). The map is a **confirmation**, not something to read. If a simple arrow and band test as faster in the lab than the map, drop the map.
+3. It appears only while the voice alert is active, and closes on "passed" or after 15 s.
+4. In daylight it must stay readable: bright band, black text (see accessibility).
+5. Must never cover a navigation turn warning for more than the alert's duration.
+
+**Platform limits (OPINION, from general Android and iOS knowledge; not verified in this session):**
+1. Android restricts apps from opening themselves from the background (since Android 10), and full-screen alerts are meant for calls and alarms (tightened in Android 14). A draw-over-other-apps overlay needs a special permission the user grants once, and some phone brands add further limits. So "auto-open" cannot be assumed to work on every phone. It must be tested on the 5 brands (see the paper plan).
+2. iOS does not let a third-party app take over the screen in the background. An iPhone could only get a notification and voice. The pilot is Android only.
+3. Android Auto and CarPlay allow only certain app categories, and they limit what these apps can draw. A map alert there would need a navigation-category build, so leave it for later.
+4. Opening the Google Maps app itself is a different matter. **I found no way for a third-party app to force Google Maps to show a coloured side**, so do not promise it. The partner route in [mvp_architecture.md](mvp_architecture.md) lets Google, Mappls or Ola draw this on their own maps if they want to.
+5. Rules for phones in cars: reg. 37 says the driver shall not use a hand-held phone. A phone fixed on the dashboard is a grey area ([research_gaps.md](research_gaps.md)). An alert that needs no touch is safer on this point.
+
+**New test in the usability plan (section 8):** compare (a) voice only, (b) voice plus arrow banner, (c) voice plus map with left band, (d) full-red screen. Measure correct action, time to action, and glance time (video or eye tracker if available). If (d) is slower or causes wrong or panicked moves, drop it.
 
 ## 5. Accessibility
 
@@ -121,7 +149,7 @@ Participants: 10 two-wheeler riders (including 5 delivery or ride-hail riders) a
    1. Play each case with a recorded siren and a simulated road video. Measure time from alert start to the participant stating the action ("left", "stay", "nothing").
    2. Pass: at least 90% correct, median under 2 s, in each language.
    3. Check comprehension of banner icons with sound off, and colour-blind and deaf modes.
-2. **Driving simulator or video-based task (week 3).** If no simulator, use a screen-based hazard-perception task. Compare voice only, voice plus banner, banner only.
+2. **Driving simulator or video-based task (week 3).** If no simulator, use a screen-based hazard-perception task. Compare voice only, voice plus banner, banner only, voice plus map with side band (4b), and a full-red screen as a negative control.
 3. **Roadside test with no real ambulance (week 4-6).**
    1. Closed or low-traffic road with permission from the institute and local police. A decoy vehicle with no siren or flasher, and no claim to be an ambulance.
    2. The alert is triggered by a scripted vehicle on a test route, using a **test voice prefix** ("Test.") so riders never treat it as real.
