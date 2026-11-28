@@ -167,7 +167,7 @@ Per ambulance per month, at ₹1,500 list price.
 |---|---|---|
 | 1-30 | Install, train crews, dispatch board live; alerts **off** | ≥80% of the pilot ambulances' emergency runs are tracked; dispatcher uses the board at least 4 days a week |
 | 31-60 | First monthly response-time report; hospital ETA link in use | Owner uses the report with at least one client, or says in writing why not |
-| 61-90 | Alert feature on for consenting crews and a small, consented rider group (only with ethics approval and written operator and police approval) | No safety incident; latency gates met (median under 5 s, p95 under 15 s, [mvp_architecture.md §6](mvp_architecture.md#6-eight-week-build-plan-solo)) |
+| 61-90 | Alert feature on for consenting crews and a small, consented rider group (only with ethics approval, written operator and police approval, the native driver app, and a grant for insurance; otherwise skipped) | No safety incident; latency gates met (median under 5 s, p95 under 15 s, [mvp_architecture.md §6](mvp_architecture.md#6-eight-week-build-plan-solo)) |
 | Day 90 | Decision | Operator agrees to pay (signed order or written refusal with reasons) |
 
 Alert-on runs during the pilot are tied to the research protocol in [paper_plan.md §4.4](paper_plan.md#44-optional-consented-field-pilot-rq4). If approvals do not arrive, the operator pilot runs without alerts. **The business pilot must not depend on the alert.**
@@ -276,16 +276,19 @@ Update this table with real interview prices and pilot conversion after week 26.
 
 ## 11. Milestones
 
-| By (from 30 Nov 2026) | Milestone | Evidence |
+| By (week of [project_plan.md](project_plan.md), from 30 Nov 2026) | Milestone | Evidence |
 |---|---|---|
-| Week 4 | 30-name operator list; 5 interviews done; ethics application submitted | Interview notes in the repo (anonymised) |
-| Week 8 | 12+ interviews; go or no-go on the operator product (gate G1); crew app and dispatch board v0 | Gate decision recorded |
-| Week 10 | PRAYAS or incubator application submitted | Application copy |
-| Week 12 | One pilot agreement signed (gate G2) | Signed agreement (not a quote or a promise) |
-| Week 16 | Pilot live; latency and battery benchmark done (paper RQ1) | Benchmark table |
-| Week 20 | Lab usability study done if ethics approved (paper RQ2) | Study data |
-| Week 24 | Pilot report; paper draft | Report signed by the operator |
-| Week 26 | First invoice or a documented "no" (gate G4) | Invoice or written reasons |
+| Week 1 | CBIT startup cell visited; ethics body identified | Notes |
+| Week 2 | Mentor asked (CBIT cell or alumni) | Email or meeting note |
+| Week 5 | 30-name operator list; 5 interviews done; ethics application submitted | Interview notes in the repo (anonymised) |
+| Week 7 | Legal check L1 done (two-wheeler screen go or no-go) | L1 note |
+| Week 9 | 10+ interviews; go or no-go on the operator product (gate G1); web crew app and dispatch board v0 | Gate decision recorded |
+| Week 10 | PRAYAS or incubator application submitted (after the CBIT step) | Application copy |
+| Week 15 | One pilot agreement signed (gate G2, cold-outreach case) | Signed agreement (not a quote or a promise) |
+| Week 16 | Latency and battery benchmark (paper RQ1); may slip 3-4 weeks | Benchmark table |
+| Week 20 | Pilot in use (gate G3); lab usability study done if ethics approved (paper RQ2) | Usage numbers; study data |
+| Week 24 | Paper draft to the CBIT supervisor | Draft |
+| About week 28 | Pilot day 90: first invoice or a documented "no" (gate G4) | Invoice or written reasons |
 
 ---
 
