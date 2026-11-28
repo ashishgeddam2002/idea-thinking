@@ -50,7 +50,9 @@ Rules:
 
 Translations were drafted by the model and are **not** checked by native speakers. Test with 5 speakers per language before any use. Distances are rounded to the nearest 50 m.
 
-| Case | English | Telugu | Hindi | Urdu |
+**Pilot languages (updated 28 Nov 2026): English, Telugu and Hindi only.** The founder speaks all three and will do the first review; a 5-speaker test per language is still required. **Urdu is moved to a later release**, pending a native-speaker reviewer; the Urdu strings below are kept for reference, are **unreviewed**, and must not ship.
+
+| Case | English | Telugu | Hindi | Urdu (later; unreviewed) |
 |---|---|---|---|---|
 | 3 | Ambulance behind you, 200 metres. Move left if safe. | అంబులెన్స్ మీ వెనుక, 200 మీటర్లు. వీలైతే ఎడమవైపుకు వెళ్లండి. | एम्बुलेंस आपके पीछे, 200 मीटर। सुरक्षित हो तो बाईं ओर हो जाइए। | ایمبولینس آپ کے پیچھے، دو سو میٹر۔ محفوظ ہو تو بائیں طرف ہو جائیں۔ |
 | 4 | Ambulance behind you. Stay where you are. | అంబులెన్స్ మీ వెనుక ఉంది. ఉన్న చోటే ఉండండి. | एम्बुलेंस पीछे है। अपनी जगह रुके रहिए। | ایمبولینس پیچھے ہے۔ اپنی جگہ رکے رہیں۔ |
@@ -59,7 +61,7 @@ Translations were drafted by the model and are **not** checked by native speaker
 
 Banner strings (max 5 words, large type, one language at a time, chosen in app settings; default from phone language):
 
-| Case | English | Telugu | Hindi | Urdu |
+| Case | English | Telugu | Hindi | Urdu (later; unreviewed) |
 |---|---|---|---|---|
 | 3 | AMBULANCE. MOVE LEFT | అంబులెన్స్. ఎడమకు | एम्बुलेंस। बाएँ | ایمبولینس۔ بائیں |
 | 4 | AMBULANCE. STAY PUT | అంబులెన్స్. ఆగండి | एम्बुलेंस। रुकिए | ایمبولینس۔ رکیں |
@@ -75,7 +77,7 @@ Voice rules: one sentence of at most 8 words when TTA is under 30 s; no jargon; 
 | Voice | First channel. Lower ("duck") other audio, including navigation, by 70% for the sentence, then restore. Audio focus: `AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK`. Prefer the call/navigation audio stream so it plays through Bluetooth helmets and earphones. | Eyes stay on the road. |
 | Banner | Cars only. Full screen, shown over the lock screen if the OS allows (see 4b for limits). Black on bright yellow, or white on dark blue (both pass colour-blind checks below). Arrow at least 40% of screen height. Max 5 words. No buttons: nothing to tap. Auto-dismiss on "passed" or after 15 s. | Glance under 2 s. |
 | Vibration | Pattern distinct from calls and messages: three short pulses then one long (100-100-100-100-100-100-500 ms), amplitude high. Different pattern for "passed" (one short). | Deaf or noisy-road drivers. |
-| Two-wheelers | Audio only, through earphones or a Bluetooth helmet. Screen stays off or dim. No banner needed. If no earphones are connected, do not use the loudspeaker as the only channel: **OPINION:** road noise makes it unreliable; use vibration (phone in pocket) as backup and record the case in the pilot. | The rider cannot read a screen. |
+| Two-wheelers | **Audio first**, through earphones or a Bluetooth helmet, with vibration as backup. If no earphones are connected, do not use the loudspeaker as the only channel: **OPINION:** road noise makes it unreliable; use vibration (phone in pocket) and record the case in the pilot. **Screen: off by default.** A handlebar-mounted screen is allowed **only if legal check L1 passes** (§4c), and then only as the reduced two-wheeler screen in §4b: arrow and band, no map, no text beyond one word, nothing to touch. | The founder wants screen and audio for gig riders too; the rider cannot safely read a screen, and the phone-use rule is unverified. |
 | Car, hands-free | Voice plus banner on a dash-mounted phone. | Same reg. 37 caution. |
 
 ### 4b. Map-style visual alert (added after founder feedback)
@@ -88,7 +90,7 @@ Idea: on a dash-mounted phone or a car screen, show a map-like screen with the s
 | Side colouring | Case 3 (move left): left half of the screen and left road edge in a bright **blue** band with a big left arrow. Case 4 (stay put): whole screen **amber** with a stop icon. Case 5 (move left and stop): left blue band plus a stop icon. **Red is not used for the whole screen.** | **OPINION:** a fully red screen reads as "danger, brake hard" and can cause a panic stop or a swerve. About 1 in 12 men are red-green colour blind (common figure, not checked in this session), so side must be shown by position and an arrow, not by colour alone. |
 | "Stay on the right" | **Not offered.** If the driver is already in the leftmost lane, the screen says "stay put", not "stay right". | Reg. 27(5)(a) says left. The only exception found is a police officer's direction. If a police officer directs otherwise, the officer wins, and the app cannot know that. |
 | Auto-open on cars | If the phone is on a dash mount and the app has permission, show the alert as a full-screen overlay. On Android Auto or CarPlay, the alert would have to come from a navigation or similar approved app category. | See "Platform limits" below. |
-| Two-wheelers | **No map and no screen.** Voice and vibration only. | The rider cannot look at a screen. |
+| Two-wheelers | **Default: no screen.** Voice and vibration only. **If L1 passes (§4c):** a reduced screen on a fixed handlebar mount: blue left band and arrow (or amber "stop" icon), at most one word, **no map**, appears only while the voice plays, nothing to touch. Voice is always the first channel; the screen only confirms it. Tested in the lab (§8) before any road use. | The rider cannot look at a screen for long; legal status unverified. |
 
 Rules for the screen:
 1. At most 5 words, the arrow, and the distance. No buttons, no zoom, nothing to touch.
@@ -96,6 +98,20 @@ Rules for the screen:
 3. It appears only while the voice alert is active, and closes on "passed" or after 15 s.
 4. In daylight it must stay readable: bright band, black text (see accessibility).
 5. Must never cover a navigation turn warning for more than the alert's duration.
+
+### 4c. Blocking legal check L1: phone screens while riding or driving
+
+| | |
+|---|---|
+| Question | Does the 2020 amendment (reported as G.S.R. 586(E)) add a proviso to reg. 37(1), Driving Regulations 2017, allowing a phone for navigation if fixed on the dashboard? Does it cover a handlebar mount on a two-wheeler, and a voice alert? |
+| Why blocking | The founder wants a screen for gig riders. Without this text, a two-wheeler screen may be unlawful, and an unlawful feature raises liability after a crash. |
+| Current status | **Unverified.** The proviso is not in the mirror read so far ([research_gaps.md §1](research_gaps.md#1-exact-statute-text-priority-1)). |
+| Owner | Founder |
+| Due | **Week 7 (11-17 Jan 2027)** of [project_plan.md](project_plan.md) |
+| How | Read the notification on egazette.gov.in (try from a CBIT or home network; it did not respond from the research container); then ask a lawyer (question 7 in [privacy_design.md §8](privacy_design.md#8-questions-for-a-lawyer)) via the CBIT cell or a free law clinic |
+| If it fails or is not done | No screen for two-wheelers in any test or release. Voice and vibration only. Car dash-mounted screens continue, still subject to the same check. |
+
+**Safety rule kept:** whatever L1 finds, the alert is audio-first, needs no touch, and says "if safe".
 
 **Platform limits (OPINION, from general Android and iOS knowledge; not verified in this session):**
 1. Android restricts apps from opening themselves from the background (since Android 10), and full-screen alerts are meant for calls and alarms (tightened in Android 14). A draw-over-other-apps overlay needs a special permission the user grants once, and some phone brands add further limits. So "auto-open" cannot be assumed to work on every phone. It must be tested on the 5 brands (see the paper plan).
@@ -121,7 +137,7 @@ Rules for the screen:
 3. Rate limit: at most 3 alerts per driver per 10 minutes (**ESTIMATE**, tune in the pilot).
 4. Cancel: if the crew ends the run, or the ambulance leaves the corridor, send "cancel" and play nothing (or "passed" only if an alert was already spoken).
 5. Staleness: if the phone has not received a corridor update for 10 s, drop the alert silently.
-6. Riders on two-wheelers get voice and vibration only, never a banner.
+6. Riders on two-wheelers get voice and vibration only. The reduced handlebar screen (§4b) is allowed only after legal check L1 passes (§4c) and the lab study shows it does not slow the correct action. Never a full banner or map on a two-wheeler.
 7. User can mute for 1 hour. The app never ranks or scores the driver (see [privacy_design.md](privacy_design.md)).
 
 ## 7. Human-factors evidence
@@ -143,7 +159,7 @@ What the evidence does not show: any field result that alerts shorten ambulance 
 
 ## 8. Usability test plan (20 participants)
 
-Participants: 10 two-wheeler riders (including 5 delivery or ride-hail riders) and 10 car, auto or cab drivers; mixed Telugu, Hindi, Urdu and English speakers. **Needs ethics-committee approval before recruitment** (see paper plan). Pay a small fixed amount (**ESTIMATE** ₹300 each).
+Participants: 10 two-wheeler riders (including 5 delivery or ride-hail riders) and 10 car, auto or cab drivers; mixed Telugu, Hindi and English speakers (Urdu later). **Needs ethics-committee approval before recruitment** (see paper plan). Pay a small fixed amount (**ESTIMATE** ₹300 each) only if a grant is in hand; otherwise unpaid volunteers, if the ethics committee allows. If L1 passed, add the reduced handlebar screen as a condition for riders.
 
 1. **Lab mock-up (week 1-2, seated, no vehicle).**
    1. Play each case with a recorded siren and a simulated road video. Measure time from alert start to the participant stating the action ("left", "stay", "nothing").
