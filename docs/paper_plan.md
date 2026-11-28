@@ -53,7 +53,7 @@ RQ1 and RQ2 are measurable by one student. RQ3 depends on assumptions I cannot v
 5. Brand differences are part of the finding (battery-manager behaviour; [dontkillmyapp.com](https://dontkillmyapp.com/)).
 
 ### 4.3 Usability study (RQ2)
-See the test plan in [alert_message_spec.md](alert_message_spec.md): lab with 20 participants, then a roadside test with no real ambulance. Measures: correct-action rate, time to correct action, subjective workload (NASA-TLX or a short form), comprehension by language. Ethics approval first.
+See the test plan in [alert_message_spec.md](alert_message_spec.md): lab with 20 participants, then a roadside test with no real ambulance. Measures: correct-action rate, time to correct action, subjective workload (NASA-TLX or a short form), comprehension by language (English, Telugu, Hindi). Ethics approval first.
 
 ### 4.4 Optional consented field pilot (RQ4)
 Only after: ethics approval, operator and police written approval, no incident in 4.3. Alerts on alternate runs or days as a control; opt-in riders; pseudonymous logs per [privacy_design.md](privacy_design.md). If approvals do not arrive, omit it and list it under future work.
@@ -127,3 +127,12 @@ Dependencies: the MVP build in [mvp_architecture.md](mvp_architecture.md) runs i
 2. Calibration data for SUMO (traffic counts, speeds, vehicle mix): none yet.
 3. Whether the institute's ethics body covers a lab study with riders.
 4. The supervisor's view on venue choice and authorship.
+
+## 8. Resources and funding (added 28 Nov 2026)
+
+1. **Own budget is ₹0.** Phones for RQ1 are borrowed (5 brands from friends, classmates or a CBIT lab). RQ2 participants are unpaid volunteers unless a grant pays ₹300 each (**ESTIMATE**, ₹6,000 total). RQ4 needs insurance and incentives, so it is **impossible without a grant**.
+2. **Institute:** CBIT (Hyderabad) will back the work "if the paper has enough strength" (founder's words). Share the outline with the supervisor at week 23 of [project_plan.md](project_plan.md) for a strength check. Ethics committee: `[to confirm]`.
+3. **Languages:** English, Telugu and Hindi only (the founder speaks all three); Urdu is future work, pending a native reviewer.
+4. **Two-wheeler screen:** tested in RQ2 only if legal check L1 passes ([alert_message_spec.md §4c](alert_message_spec.md#4c-blocking-legal-check-l1-phone-screens-while-riding-or-driving)).
+5. **Equal weight with the business:** see [project_plan.md §4](project_plan.md#4-keeping-the-paper-and-the-business-in-step) for shared assets and the cut order.
+6. **Build risk:** the native driver app is built AI-assisted with no prior Android experience; RQ1 may slip 3-4 weeks (**ESTIMATE**, [mvp_architecture.md §6.2](mvp_architecture.md#62-timeline-estimate)).
