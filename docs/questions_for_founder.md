@@ -11,7 +11,7 @@ Labels: **FACT**, **ESTIMATE**, **OPINION**, **UNVERIFIED**, `[to confirm]` (ans
 | 2 | Revenue or paper? | **Both, equally** | Shared-asset table and cut order ([project_plan.md §4](project_plan.md#4-keeping-the-paper-and-the-business-in-step)) |
 | 3 | Hours and dates? | "No problem in time"; 3rd semester, mostly project work | 10-12 h/week kept as `[to confirm]`; 2 buffer weeks |
 | 4 | Supervisor and ethics? | **CBIT (Hyderabad) backs us if the paper has enough strength** | Supervisor strength check at week 23; ethics body still `[to confirm]` |
-| 5 | Own money? | **None**, except the Claude Pro plan; only a grant can pay | ₹0 budget; grant-gated list ([project_plan.md §8](project_plan.md#8-what-cannot-be-done-without-a-grant), [mvp_architecture.md §5](mvp_architecture.md#5-costs-estimates-in-inr-not-quotes-updated-28-nov-2026-own-budget-is-0)) |
+| 5 | Own money? | **None**, except the Claude Pro plan; only a grant can pay | ₹0 budget; grant-gated list ([project_plan.md §8](project_plan.md#8-what-cannot-be-done-without-a-grant), [mvp_architecture.md §5](mvp_architecture.md#5-costs-estimates-in-inr-not-quotes)) |
 | 6 | Incorporate? | **Yes** | After gate G1; fees need a source |
 | 8 | Sales experience? | **None** | Sales mentor; interview-first approach |
 | 10 | Languages? | **English, Hindi, Telugu** | Pilot in these three; Urdu moved to later ([alert_message_spec.md §3](alert_message_spec.md#3-wording-by-language-draft-native-speaker-review-needed)) |
