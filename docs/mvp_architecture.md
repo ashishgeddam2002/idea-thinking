@@ -70,7 +70,9 @@ Intended for Rapido, Swiggy, Ola Maps, Mappls or any partner. **OPINION:** they 
 5. Terms: partner is responsible for how and whether it shows the alert; we provide the corridor, not an instruction to any driver. The wording stays "if safe" (see alert spec).
 6. Rate limits and uptime SLO are **not** promised in the pilot.
 
-## 5. Costs (ESTIMATES in INR; not quotes). Updated 28 Nov 2026: own budget is ₹0
+## 5. Costs (ESTIMATES in INR; not quotes)
+
+Updated 28 Nov 2026: own budget is ₹0.
 
 The founder has **no own money** to spend (only a Claude Pro plan). Everything below is free, borrowed, or gated on a grant (**[G]**). Cloud free-tier limits and India-region availability are **not checked**.
 
