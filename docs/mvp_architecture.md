@@ -16,7 +16,7 @@ Related: [alert_message_spec.md](alert_message_spec.md), [privacy_design.md](pri
 
 | Component | Job | Key choices |
 |---|---|---|
-| **Crew app** (Android, Kotlin) | Dispatch button ("Start emergency run"), destination from a hospital list, siren/flasher toggle, GPS every 2-3 s, sends signed messages, shows "run ended". | Foreground service while a run is active. Key pair in Android Keystore, registered by the operator. Queue and retry when offline, but drop positions older than 10 s. |
+| **Crew app** (stage A: web/PWA; stage B: Android, Kotlin; see §6.1) | Dispatch button ("Start emergency run"), destination from a hospital list, siren/flasher toggle, GPS every 2-3 s, sends signed messages, shows "run ended". | Foreground service while a run is active. Key pair in Android Keystore, registered by the operator. Queue and retry when offline, but drop positions older than 10 s. |
 | **Backend** | Verify crew signatures, snap positions to roads, predict the route, build the corridor, sign it, publish to the area topic, store logs. | OSRM on OpenStreetMap India extract (free, self-hosted; **FACT** OSRM and OSM are open-source). One small server for the pilot. |
 | **Corridor builder** | Convert the route into the next 300-800 m of OSM way segments plus a time window (now to now+90 s), refreshed every 2-3 s. | Include layer tags (bridge, tunnel) and carriageway side. Corridor expires after 10 s without refresh. |
 | **Pub/sub** | Deliver corridors to phones by coarse area. | MQTT broker (for example Mosquitto or EMQX) with topics per geohash cell, or WebSocket. **OPINION:** MQTT over a held connection, not FCM, for the alert path. FCM only as a wake-up fallback. |
