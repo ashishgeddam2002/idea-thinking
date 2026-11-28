@@ -1,6 +1,6 @@
 # Business plan: ambulance operations software, with a give-way alert as a feature
 
-Status: draft for the founder to use when talking to operators, incubators and grant bodies. Written 27 Nov 2026.
+Status: draft for the founder to use when talking to operators, incubators and grant bodies. Written 27 Nov 2026; updated 28 Nov 2026 with the founder's answers ([questions_for_founder.md](questions_for_founder.md)): ₹0 own budget, no operator contacts, no sales or Android experience, CBIT backing, revenue and paper weighted equally.
 Labels used throughout: **FACT** (with a link), **ESTIMATE** (a number with its assumptions shown), **OPINION** (a judgement), **UNVERIFIED** (not checked; do not repeat as fact).
 **Not legal advice.** Lawyer questions are in [privacy_design.md §8](privacy_design.md#8-questions-for-a-lawyer).
 **No novelty or patent claim is made anywhere in this plan.**
@@ -12,15 +12,15 @@ Earlier, longer research (linked, not copied): [India ambulance alert evaluation
 
 | | |
 |---|---|
-| **What we sell** | Phone-based software for private ambulance operators in Hyderabad: dispatch board, live ETA to the receiving hospital, and response-time reports. The crew uses an Android app on a phone already in the ambulance, so no hardware is needed. |
+| **What we sell** | Phone-based software for private ambulance operators in Hyderabad: dispatch board, live ETA to the receiving hospital, and response-time reports. The crew uses a web app on a phone already in the ambulance (a native Android app later), so no hardware is needed. |
 | **The alert** | A give-way alert ("ambulance behind you: move left if safe, or stay where you are") is built in as an opt-in feature and a research pilot. It is **not** the business. |
 | **Why the pivot** | Earlier research found that nobody pays drivers to give way, gig platforms publish no partner SDK, and the alert technology has no moat (see §1.3). An operator has a budget and a reason to pay. The driver network does not. |
 | **First customers** | Small and mid-size private ambulance operators and hospital in-house fleets in Hyderabad. RED.Health is the best-known Hyderabad operator, but news reports say it already runs its own technology platform (§4), so treat it as a partner or a reference contact, not a sure buyer. |
 | **Price** | ₹1,000-2,000 per ambulance per month. **ESTIMATE**, not tested with any buyer. Free 90-day pilot first. |
 | **Traction** | None yet. No customers, letters of intent or pilots. `[to fill]` after the interviews. |
-| **Ask (now)** | A prototype grant of about ₹10 lakh (**ESTIMATE**) through a NIDHI-PRAYAS centre (CIE at IIIT Hyderabad or i-TIC at IIT Hyderabad), plus incubation. Later: Startup India Seed Fund, once the company is incorporated and a paid pilot exists. No angel round until an operator pays. |
-| **12-month goal** | One paying operator with at least 10 ambulances, an operator-signed pilot report, and one workshop or conference paper on alert latency and message design. |
-| **Biggest risks** | (1) Operators may not pay for software they get bundled from trackers or build themselves. (2) The alert creates a duty of care and phone-use legal questions. (3) Solo founder with an M.Tech to finish. |
+| **Ask (now)** | First, whatever CBIT's startup cell offers `[to confirm]`. Then a prototype grant of about ₹10 lakh (**ESTIMATE**) through a NIDHI-PRAYAS centre (CIE at IIIT Hyderabad or i-TIC at IIT Hyderabad), plus incubation. Later: Startup India Seed Fund, once the company is incorporated and a paid pilot exists. No angel round until an operator pays. **Own money: ₹0**, so everything before a grant is free or borrowed. |
+| **12-month goal** | Equal weight: one paying operator with at least 10 ambulances and an operator-signed pilot report; and one workshop or conference paper on alert latency and message design, backed by CBIT. |
+| **Biggest risks** | (1) Operators may not pay for software they get bundled from trackers or build themselves. (2) The alert creates a duty of care and phone-use legal questions (a two-wheeler screen is blocked until legal check L1 passes). (3) Solo founder with no contacts, no sales experience, no Android experience and no money. |
 
 ---
 
@@ -58,11 +58,11 @@ Earlier, longer research (linked, not copied): [India ambulance alert evaluation
 ### 2.1 MVP (months 1-4)
 | Module | What it does | Built from |
 |---|---|---|
-| Crew app (Android) | Start or stop an emergency run, choose the destination hospital, send GPS every 2-3 s, siren and flasher toggle | [mvp_architecture.md §1](mvp_architecture.md#1-components) (already designed) |
+| Crew app (web/PWA first; native Android later) | Start or stop an emergency run, choose the destination hospital, send GPS every 2-3 s while the phone is mounted with the screen on, siren and flasher toggle | [mvp_architecture.md §6.1](mvp_architecture.md#61-two-stage-approach): the web version cannot track in the background, which is acceptable for the business pilot but not for alert road tests |
 | Dispatch board (web) | Live map of the operator's ambulances, run status, assign a run | New; simple web app |
 | ETA to hospital | Route and ETA from OSRM on OpenStreetMap; a shareable link for the receiving hospital | OSRM (open source) |
 | Response-time report | Monthly PDF or CSV: call-to-dispatch, dispatch-to-scene, scene-to-hospital times per run | New; needs the operator to log call time |
-| Give-way alert (opt-in) | Signed corridor to opted-in driver phones; voice and vibration; map-style screen on dash-mounted car phones with a blue left band and arrow; never "move right" | [alert_message_spec.md](alert_message_spec.md), [privacy_design.md](privacy_design.md) |
+| Give-way alert (opt-in; native Android driver app) | Signed corridor to opted-in driver phones; voice and vibration first; map-style screen on dash-mounted car phones with a blue left band and arrow; for two-wheeler and gig riders, a reduced handlebar screen (arrow and band only) **only if legal check L1 passes**; never "move right" | [alert_message_spec.md §4](alert_message_spec.md#4-channels), [§4c](alert_message_spec.md#4c-blocking-legal-check-l1-phone-screens-while-riding-or-driving), [privacy_design.md](privacy_design.md) |
 
 Not in the MVP: patient records, billing, insurance claims, iOS, hardware trackers, any 108 integration.
 
@@ -77,6 +77,8 @@ Not in the MVP: patient records, billing, insurance claims, iOS, hardware tracke
 1. No patient data anywhere ([privacy_design.md §2](privacy_design.md#2-ambulance-side-data)).
 2. Driver location never leaves the phone by default (on-device matching).
 3. The alert says "if safe", fails silent on stale data, and never says "move right".
+4. Audio first for everyone. Screens confirm, never replace, the voice.
+5. Pilot languages: English, Telugu and Hindi. Urdu later, after a native-speaker review.
 
 ---
 
@@ -152,11 +154,12 @@ Per ambulance per month, at ₹1,500 list price.
 ## 7. Go-to-market: Hyderabad first
 
 ### 7.1 Steps
-1. **Map the market (weeks 1-3).** List private operators in Hyderabad from Google Maps, JustDial, hospital tie-ups and the earlier research notes. Target 30 names, `[to fill]`.
-2. **Interview (weeks 2-8).** 12-15 interviews: 8+ operators, 3-5 hospitals, 3+ crews. Script in [project_plan.md](project_plan.md). No pitching in the first half of each interview.
-3. **Get a pilot (weeks 8-12).** Offer the free 90-day pilot to the 2-3 operators with the clearest pain. Ask for a one-page pilot agreement (processor terms; lawyer question 8).
-4. **Run the 90-day pilot (about weeks 12-24).**
-5. **Convert (weeks 22-26).** Pilot report, price conversation, first invoice.
+0. **Get a mentor (weeks 1-2).** The founder has no contacts and no sales experience. Ask CBIT's startup cell `[to confirm name]` and the alumni office for a sales or healthcare mentor. **Do not assume warm introductions** anywhere in this plan.
+1. **Map the market (weeks 1-3).** List private operators in Hyderabad from Google Maps, JustDial, hospital tie-ups and the earlier research notes. Target 30 names, `[to fill]`. All contact is cold: calls, WhatsApp, and walk-ins at ambulance stands near large hospitals.
+2. **Interview (weeks 2-9).** 12-15 interviews: 8+ operators, 3-5 hospitals, 3+ crews. Script in [project_plan.md](project_plan.md). No pitching in the first half of each interview.
+3. **Get a pilot (weeks 10-15; cold-outreach case).** Offer the free 90-day pilot to the 2-3 operators with the clearest pain. Ask for a one-page pilot agreement (processor terms; lawyer question 8).
+4. **Run the 90-day pilot (about weeks 15-28).**
+5. **Convert (about weeks 26-30).** Pilot report, price conversation, first invoice.
 6. **Use the reference** to reach the next 5 operators, then a second city only after 3 paying Hyderabad customers.
 
 ### 7.2 What the 90-day pilot must prove
@@ -216,7 +219,10 @@ None of these is a moat. The defensible parts would be customer relationships, o
 | 6 | Gig platforms block or ignore the alert | Platform gatekeeping | High | Not in the business plan's revenue; API spec only |
 | 7 | Fake or false alerts | Security, trust | Medium | Signed corridors; operator audit of "emergency" flags |
 | 8 | Android battery managers kill the app | Technical | High | Foreground service; per-brand setup; brand benchmark ([mvp_architecture.md §3](mvp_architecture.md#3-failure-handling)) |
-| 9 | Founder time: M.Tech plus a startup | Team | High | 10-12 hours a week plan; decision gates; drop the alert field pilot first if time runs out |
+| 9 | Founder time: M.Tech plus a startup | Team | Medium (3rd semester, mostly project work) | 10-12 hours a week plan `[to confirm]`; decision gates; cut order in [project_plan.md §4](project_plan.md#4-keeping-the-paper-and-the-business-in-step) |
+| 12 | No Android experience; AI-assisted code fails on background and battery rules | Technical, team | High | Web crew app first (stage A); native driver app only for the alert and paper; test on real phones early; slip of 1.5-2× assumed ([mvp_architecture.md §6](mvp_architecture.md#6-build-plan-ai-assisted-no-prior-android-experience)) |
+| 13 | No money: anything not free or borrowed cannot happen | Financial | Certain until a grant | CBIT cell first, then PRAYAS; list of grant-gated items in [project_plan.md §8](project_plan.md#8-what-cannot-be-done-without-a-grant) |
+| 14 | No contacts and no sales experience slow the first pilot | Market, team | High | Mentor step; cold-outreach plan; G2 set at week 15 |
 | 10 | Ethics or police approval delayed | Regulatory | Medium | The business pilot does not need them; only the alert field pilot does |
 | 11 | 108 data or tenders demand things a student startup cannot meet | Market | High | Stay out of 108 for 12 months |
 
@@ -262,7 +268,7 @@ Note on Low: Y3 revenue (₹12.6 lakh) is about ₹2.6 lakh above Y3 costs (₹1
 | Travel, tools, misc | 0.6 | 1.5 | 5.5 |
 | **Total (₹ lakh)** | **7.0** | **19.0** | **40.0** |
 
-Pre-revenue build and pilot (next 6 months): about ₹1.2 lakh direct costs per [mvp_architecture.md §5](mvp_architecture.md#5-costs-estimates-in-inr-not-quotes), plus company registration and legal advice `[to fill quotes]`.
+Pre-revenue build and pilot (next 6 months): **₹0 own money**. Without a grant, only free or borrowed resources are used. With a grant, about ₹1-1.5 lakh direct costs per [mvp_architecture.md §5](mvp_architecture.md#5-costs-estimates-in-inr-not-quotes), plus company registration and legal advice `[to fill quotes]`. The year-1 founder stipend in this model also needs a grant.
 
 Update this table with real interview prices and pilot conversion after week 26. Every number here is a placeholder for a measured one.
 
@@ -287,9 +293,10 @@ Update this table with real interview prices and pilot conversion after week 26.
 
 | Stage | Source | Amount | What it pays for | Eligibility notes | Status |
 |---|---|---|---|---|---|
-| Now | **NIDHI-PRAYAS** prototype grant via a PRAYAS centre | Up to ₹10 lakh under PRAYAS 1.0; DST's newer PRAYAS pages mention up to ₹20 lakh (and ₹40 lakh for specialised centres) | Build, phones, pilot, legal advice, founder stipend if allowed | Individual innovators can apply; centres include CIE at IIIT Hyderabad ([CIE PRAYAS](https://cie.iiit.ac.in/dst-nidhi/)) and i-TIC at IIT Hyderabad ([i-TIC PRAYAS page](https://itic.iith.ac.in/nidhi-prayas.html)). Which version is open now: **UNVERIFIED** ([DST PRAYAS 2.0](https://nidhi.dst.gov.in/prayas2-0/)) | Not applied |
-| Now | Incubation (desk, mentors, introductions) | In kind | Credibility with operators | CIE (IIIT-H), i-TIC (IIT-H; listed as a NIDHI-TBI focused on energy, biomedical and robotics: [India Science & Technology listing](https://www.indiascienceandtechnology.gov.in/listingpage/tbis)), ASPIRE (UoH; has an IT/electronics centre, ASPIRE-TIDE: [ASPIRE](https://aspire.uohyd.ac.in/about-us-2/)). Ask each which fits mobility or health software | Not applied |
-| After incorporation and a pilot | **Startup India Seed Fund Scheme** via an incubator | Grant up to ₹20 lakh for proof of concept, prototype or product trials; debt or convertible up to ₹50 lakh for scale-up | Second engineer; first paid pilots | DPIIT recognition, incorporated less than 2 years, at least 51% Indian promoters; milestone-based tranches ([myScheme SISFS](https://myscheme.gov.in/schemes/sisfs-fs)). Still open: **check the portal** | Not eligible yet (no company) |
+| **Step 1 (now)** | **CBIT startup or seed cell** `[to confirm name]` and any CBIT grant | `[to confirm]`: **not verified** what CBIT offers | Whatever it covers: mentoring, legal help, small grant, phones, introductions to PRAYAS centres | Founder says CBIT backs the work if the paper is strong. Ask in week 1 | Not asked |
+| Step 2 | **NIDHI-PRAYAS** prototype grant via a PRAYAS centre | Up to ₹10 lakh under PRAYAS 1.0; DST's newer PRAYAS pages mention up to ₹20 lakh (and ₹40 lakh for specialised centres) | Build, phones, pilot, legal advice, founder stipend if allowed | Individual innovators can apply; centres include CIE at IIIT Hyderabad ([CIE PRAYAS](https://cie.iiit.ac.in/dst-nidhi/)) and i-TIC at IIT Hyderabad ([i-TIC PRAYAS page](https://itic.iith.ac.in/nidhi-prayas.html)). Which version is open now: **UNVERIFIED** ([DST PRAYAS 2.0](https://nidhi.dst.gov.in/prayas2-0/)) | Not applied |
+| Step 2 | Incubation (desk, mentors, introductions) | In kind | Credibility with operators | CIE (IIIT-H), i-TIC (IIT-H; listed as a NIDHI-TBI focused on energy, biomedical and robotics: [India Science & Technology listing](https://www.indiascienceandtechnology.gov.in/listingpage/tbis)), ASPIRE (UoH; has an IT/electronics centre, ASPIRE-TIDE: [ASPIRE](https://aspire.uohyd.ac.in/about-us-2/)). Ask each which fits mobility or health software | Not applied |
+| Step 3: after incorporation (founder is willing) and a pilot | **Startup India Seed Fund Scheme** via an incubator | Grant up to ₹20 lakh for proof of concept, prototype or product trials; debt or convertible up to ₹50 lakh for scale-up | Second engineer; first paid pilots | DPIIT recognition, incorporated less than 2 years, at least 51% Indian promoters; milestone-based tranches ([myScheme SISFS](https://myscheme.gov.in/schemes/sisfs-fs)). Still open: **check the portal** | Not eligible yet (no company) |
 | After 3 paying operators | Angels (for example Hyderabad Angels) | `[to fill]`; size after Y1 numbers are real | Team of 3-4; second city | Only with paying customers | Not started |
 
 **Ask, in one line for a grant panel:** "₹10 lakh and incubation to build and run a 90-day pilot of no-hardware ambulance operations software with one Hyderabad operator, and to publish an evaluation of a privacy-preserving give-way alert." (ESTIMATE; adjust to the scheme's limits.)
@@ -302,13 +309,13 @@ Update this table with real interview prices and pilot conversion after week 26.
 
 | Role | Today | Gap | Cheapest fix |
 |---|---|---|---|
-| Founder: product and engineering | Solo M.Tech student, Hyderabad | Time; no sales experience assumed `[to fill]` | Supervisor as academic mentor; incubator mentor |
+| Founder: product and engineering | Solo M.Tech student (3rd semester), CBIT Hyderabad; web app built with AI help | No Android experience; no sales experience | Supervisor as academic mentor; CBIT cell mentor; AI-assisted build with a peer code review |
 | Domain (EMS operations) | None | High | Adviser: an ED doctor or a retired operator manager, 1 hour a month, `[to fill name]` |
-| Sales and operations | None | High | Founder does it for 12 months; hire after first revenue |
-| Second engineer (Android) | None | Medium | M.Tech or B.Tech intern; project credit |
+| Sales and operations | None; no operator contacts | High | Sales mentor from CBIT cell or alumni (week 2); founder does cold outreach; hire after first revenue. Co-founder: question open |
+| Second engineer (Android) | None | **High** (founder has no Android experience) | CBIT B.Tech or M.Tech student for project credit; reviews the native driver app |
 | Legal and privacy | None | High for the alert | Incubator legal clinic; pro-bono law-school clinic; questions in [privacy_design.md §8](privacy_design.md#8-questions-for-a-lawyer) |
 | Human-factors and statistics | Supervisor? `[to fill]` | Medium | Co-author on the paper |
-| Native-language review (Telugu, Hindi, Urdu) | None | Medium | Paid reviewers, about ₹2,000-5,000 each (ESTIMATE) |
+| Native-language review | Founder speaks English, Hindi, Telugu | Low for the pilot; Urdu later | Founder reviews; 5 volunteer speakers per language test the strings; Urdu waits for a native reviewer |
 
 ---
 
