@@ -167,7 +167,7 @@ Per ambulance per month, at ₹1,500 list price.
 |---|---|---|
 | 1-30 | Install, train crews, dispatch board live; alerts **off** | ≥80% of the pilot ambulances' emergency runs are tracked; dispatcher uses the board at least 4 days a week |
 | 31-60 | First monthly response-time report; hospital ETA link in use | Owner uses the report with at least one client, or says in writing why not |
-| 61-90 | Alert feature on for consenting crews and a small, consented rider group (only with ethics approval, written operator and police approval, the native driver app, and a grant for insurance; otherwise skipped) | No safety incident; latency gates met (median under 5 s, p95 under 15 s, [mvp_architecture.md §6](mvp_architecture.md#6-eight-week-build-plan-solo)) |
+| 61-90 | Alert feature on for consenting crews and a small, consented rider group (only with ethics approval, written operator and police approval, the native driver app, and a grant for insurance; otherwise skipped) | No safety incident; latency gates met (median under 5 s, p95 under 15 s, [mvp_architecture.md §6](mvp_architecture.md#6-build-plan-ai-assisted-no-prior-android-experience)) |
 | Day 90 | Decision | Operator agrees to pay (signed order or written refusal with reasons) |
 
 Alert-on runs during the pilot are tied to the research protocol in [paper_plan.md §4.4](paper_plan.md#44-optional-consented-field-pilot-rq4). If approvals do not arrive, the operator pilot runs without alerts. **The business pilot must not depend on the alert.**
