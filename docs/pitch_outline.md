@@ -28,8 +28,8 @@ Backup slides (only if asked): privacy design (on-device matching, no patient da
 2. "Why won't RED.Health just build this?" → it probably can; we target operators it does not serve, and offer it the alert as a research partnership.
 3. "Who is liable if a driver crashes after an alert?" → "if safe" wording, fail silent, no "move right", lawyer review pending, insurance `[to fill]`.
 4. "Can a student finish an M.Tech and do this?" → 3rd semester with mostly project work; the 10-12 hours a week plan with kill criteria.
+5. "Is it legal to use a phone while driving for this?" → open question (legal check L1, due week 7); audio first; screen on fixed car phones, and on two-wheeler handlebars only if L1 passes; lawyer question 7 in [privacy_design.md §8](privacy_design.md#8-questions-for-a-lawyer).
 6. "You have no Android experience. How will you build it?" → web crew app first for the business pilot; native driver app later with AI help and a peer review; slip already planned ([mvp_architecture.md §6](mvp_architecture.md#6-build-plan-ai-assisted-no-prior-android-experience)).
-5. "Is it legal to use a phone while driving for this?" → open question; voice and vibration only; screen only on fixed car phones; lawyer question 7 in [privacy_design.md §8](privacy_design.md#8-questions-for-a-lawyer).
 
 ---
 
