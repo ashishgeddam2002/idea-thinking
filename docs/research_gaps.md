@@ -91,7 +91,7 @@ Confidence: High = official or mirrored text read directly; Medium = several con
 
 ## 7. Still open (ranked)
 
-1. 2020 proviso to reg. 37(1): get the gazette text.
+1. 2020 proviso to reg. 37(1): get the gazette text. **Now blocking** (legal check L1) for any two-wheeler screen; owner: founder; due week 7 (11-17 Jan 2027). See [alert_message_spec.md §4c](alert_message_spec.md#4c-blocking-legal-check-l1-phone-screens-while-riding-or-driving).
 2. Telangana 108 contract data clauses.
 3. Whether rule 125H covers ambulances.
 4. Ola Maps and current Google Maps India features: re-check.
