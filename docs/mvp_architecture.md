@@ -70,40 +70,58 @@ Intended for Rapido, Swiggy, Ola Maps, Mappls or any partner. **OPINION:** they 
 5. Terms: partner is responsible for how and whether it shows the alert; we provide the corridor, not an instruction to any driver. The wording stays "if safe" (see alert spec).
 6. Rate limits and uptime SLO are **not** promised in the pilot.
 
-## 5. Costs (ESTIMATES in INR; not quotes)
+## 5. Costs (ESTIMATES in INR; not quotes). Updated 28 Nov 2026: own budget is ₹0
 
-Monthly, assuming 1 crew app on 5-10 ambulances and 100-300 riders in Hyderabad. Cloud prices are not checked against current lists.
+The founder has **no own money** to spend (only a Claude Pro plan). Everything below is free, borrowed, or gated on a grant (**[G]**). Cloud free-tier limits and India-region availability are **not checked**.
 
-| Month | Build and pilot stage | Cloud | Tools and misc | Test phones and incentives | Total (about) |
-|---|---|---|---|---|---|
-| 1 | Crew app and backend skeleton | 1,000 | 500 | 15,000 (2 used phones) | 16,500 |
-| 2 | Driver app, corridor logic, lab tests | 2,000 | 500 | 15,000 (2 more used phones) | 17,500 |
-| 3 | Baseline logging with crew app, alerts off | 3,000 | 1,000 | 25,000 (rider install bonuses) | 29,000 |
-| 4 | Alerts on, roadside and rider study | 4,000 | 1,000 | 35,000 (bonuses, crew stipends) | 40,000 |
-| 5 | Analysis, write-up | 3,000 | 1,000 | 5,000 | 9,000 |
-| 6 | Paper and operator pilot offer | 3,000 | 1,000 | 5,000 | 9,000 |
-| **Total** |  |  |  |  | **about ₹1.2 lakh** |
-
-The evaluation report gave ₹1-2 lakh for the 90-day pilot, so these figures are consistent. Larger line items: rider bonuses and crew stipends. Not included: professional-indemnity cover, legal advice, company registration, any paid map or SMS service.
-
-## 6. Eight-week build plan (solo)
-
-| Week | Deliverable | Done when |
+| Item | Without a grant | With a grant **[G]** (ESTIMATE) |
 |---|---|---|
-| 1 | OSRM running on an India or Telangana extract; route prediction script; message format | Route for a test A-to-B path returns segments with layer tags |
-| 2 | Crew app v0: start/stop run, GPS every 2-3 s, signing | Positions arrive signed and verified on the backend |
-| 3 | Corridor builder and signer; MQTT broker; replay tool for recorded GPS tracks | Replayed track produces a stream of corridors |
-| 4 | Driver app v0: foreground service, subscription, point-in-corridor, one English voice alert | Walking test: phone alerts at the right distance |
-| 5 | All four languages (draft strings), banner, vibration, rate limit, fail-silent rules | Unit tests for stale, expired and bad-signature cases |
-| 6 | Logging pipeline and baseline analysis script; opt-in consent screen | Logs from a test run give per-segment speed |
-| 7 | Brand benchmark: latency and battery on 5 Android brands; battery-manager setup flows | Table of p50 and p95 latency per phone |
-| 8 | Lab usability test (section 8 of the alert spec), fix list, go or no-go | Decision recorded; list of top 10 defects |
+| Development machine, OSRM, broker | Founder's laptop; open-source OSRM, Mosquitto, Postgres | same |
+| Pilot hosting | A free-tier server or database `[to check: India region, limits]`; laptop is not acceptable for a live pilot | ₹2,000-5,000 a month for one small server in India |
+| Crew phones | The operator's own Android phones (a pilot condition) | Buy 2 used phones, about ₹15,000 |
+| Test phones for the 5-brand benchmark | Borrowed from friends, classmates or a CBIT lab | Buy used phones, about ₹30,000 |
+| Rider install bonuses, crew stipends | **Impossible: dropped** | ₹25,000-60,000 (earlier estimate) |
+| Lab-study payments (20 × ₹300) | Unpaid volunteers, if ethics allows | ₹6,000 |
+| Native-language review | Founder (Telugu, Hindi) + 5 volunteer speakers each | ₹2,000-5,000 per language |
+| Legal advice, insurance | Free clinic or CBIT cell; **no field pilot without insurance** | `[to fill quote]` |
+| Maps, SMS | None used | none |
+| **Total own spend** | **₹0** | about ₹1-1.5 lakh over 6 months, as before |
 
-**Gates** (from the evaluation report; **ESTIMATE**): median delivery under 5 s and 95th percentile under 15 s; at least 95% of alerts delivered in the test; no safety incident.
+## 6. Build plan (AI-assisted, no prior Android experience)
+
+The founder has no Android experience and builds with AI help (has shipped a website this way). So the first version avoids native Android where it can.
+
+### 6.1 Two-stage approach
+
+| Stage | What | Tech | What it can do | What it **cannot** do |
+|---|---|---|---|---|
+| **A: business pilot** | Web dispatch board; web crew app (PWA) on a phone mounted and charging in the ambulance; reports; hospital ETA link | Web app, browser geolocation, Wake Lock to keep the screen on | Track an ambulance while the app is open and the screen is on; dispatch; ETA; reports. Enough for the operator pilot. | No reliable GPS with the screen off or the app in the background; the browser may pause it. No guaranteed delivery when the crew switches apps. **Cannot be the alert's crew source for a public road test.** |
+| **B: alert and paper** | Native Android driver app (and later a native crew app) | Kotlin, foreground service, held MQTT connection, on-device audio | Background location, reliable alerts with the screen off, the RQ1 benchmark | Needs native skills; slower to build; battery managers still interfere ([§3](#3-failure-handling)) |
+
+**Why:** a web or PWA driver app cannot deliver the alert: web push is not reliable enough on Android for a time-critical alert, and browsers do not allow continuous background location. Background location and reliable alerts need a native foreground service. (**OPINION**, from general platform knowledge; not tested here.)
+
+### 6.2 Timeline (ESTIMATE)
+
+| Weeks of [project_plan.md](project_plan.md) | Deliverable | Done when |
+|---|---|---|
+| 3 | Web stack and OSRM on the laptop | A route returns segments with layer tags |
+| 6 | Web crew app v0 (start/stop run, GPS while screen on) | Positions reach the backend, signed by a key held server-side for the operator |
+| 7 | Web dispatch board v0 | Live map of a test ambulance |
+| 10-12 | ETA link, response-time report, corridor builder and signer | Report generated from test runs |
+| 13-14 | Native driver app v0 (AI-assisted) | Walking test alerts at the right distance |
+| 16 | 5-brand benchmark on borrowed phones | p50/p95/p99 table |
+| 17 | Telugu and Hindi audio, fail-silent unit tests | Tests pass for stale, expired and bad-signature cases |
+
+**Realistic slip (ESTIMATE):** 1.5-2 times the original 8-week build for the native part, because of no Android experience. Expect the native driver app in weeks 16-18 rather than 13-14. Stage A has less risk of slipping because it reuses web skills.
+
+**Risk note:** AI-generated Android code can look right and still fail on foreground-service rules, battery managers and permission changes between Android versions. Mitigations: test on real borrowed phones from week 13; keep the driver app small; add unit tests for fail-silent rules; ask a CBIT student with Android experience to review `[to find]`.
+
+**Gates** (unchanged; **ESTIMATE**): median delivery under 5 s and 95th percentile under 15 s; at least 95% of alerts delivered in the test; no safety incident.
 
 ## 7. What is not decided
 
 1. MQTT versus WebSocket and which hosted broker; **ESTIMATE** only.
 2. Whether iOS is needed (assume no in the pilot; two-wheeler riders in Hyderabad mainly use Android, **OPINION**, not verified).
 3. Whether an operator will let us install the crew app (see the interview plan in the evaluation report).
-4. Local vs. hosted OSRM, depending on a laptop or a ₹2,000-5,000 a month server (**ESTIMATE** from the evaluation report).
+4. Local vs. hosted OSRM, depending on a laptop or a ₹2,000-5,000 a month server (**ESTIMATE** from the evaluation report). With ₹0 own budget, a hosted server waits for a grant or a free tier.
+5. Whether the crew side moves from the web app (stage A) to a native app (stage B) before any alert road test. **OPINION:** it must.
