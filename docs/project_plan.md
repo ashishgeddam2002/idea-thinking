@@ -1,6 +1,7 @@
 # Project plan: 26 weeks, alongside an M.Tech
 
 Status: plan, updated 28 Nov 2026 with the founder's answers ([questions_for_founder.md](questions_for_founder.md)). Week 1 starts Monday 30 Nov 2026; week 26 ends Sunday 30 May 2027.
+**Weeks 1-12 are superseded by the money-first schedule in [execution_plan.md](execution_plan.md)** where dates differ; gates and kill criteria there come earlier.
 Labels: **FACT** (linked), **ESTIMATE**, **OPINION**, **UNVERIFIED**, `[to confirm]` (founder's answer was vague). Hours and durations are **ESTIMATES**.
 Related: [business_plan.md](business_plan.md), [mvp_architecture.md](mvp_architecture.md), [paper_plan.md](paper_plan.md), [privacy_design.md](privacy_design.md), [alert_message_spec.md](alert_message_spec.md).
 
