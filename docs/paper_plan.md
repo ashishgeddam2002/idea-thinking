@@ -33,7 +33,7 @@ RQ1 and RQ2 are measurable by one student. RQ3 depends on assumptions I cannot v
 | US8483651B1 (Sprint) | Alerts phones within a set distance of an emergency vehicle. | Patent number as in earlier notes; **not re-read; no legal opinion**. |
 | US10832579B2 (Accenture) | Dispatch, route data to police and signal control. | Same caveat. |
 
-**Gap this paper addresses (OPINION):** I did not find a published evaluation of on-device matching with Indian road geometry and low-cost phones, or of alert wording in Telugu, Hindi, Urdu and English. A real literature search is needed before writing this claim; I did not do a systematic search. State it only as "to our knowledge, after a search of X, Y, Z".
+**Gap this paper addresses (OPINION):** I did not find a published evaluation of on-device matching with Indian road geometry and low-cost phones, or of alert wording in Telugu, Hindi and English (Urdu later). A real literature search is needed before writing this claim; I did not do a systematic search. State it only as "to our knowledge, after a search of X, Y, Z".
 
 ## 4. Methods
 
